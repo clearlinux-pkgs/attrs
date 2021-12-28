@@ -1,17 +1,12 @@
 # This file contains recursive sources that require this package
 aiohttp
-amazon-efs-utils
 ansible
 bowler
 cantarell-fonts
-cmd2
-conda
-dm-tree
 eternalegypt
 home-assistant
 hypothesis
 jsonschema
-mxnet
 pytest
 python-zeep
 python-zstandard

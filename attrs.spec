@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xAE2536227F69F181 (hs@ox.cx)
 #
 Name     : attrs
-Version  : 21.2.0
-Release  : 62
-URL      : https://files.pythonhosted.org/packages/ed/d6/3ebca4ca65157c12bd08a63e20ac0bdc21ac7f3694040711f9fd073c0ffb/attrs-21.2.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/ed/d6/3ebca4ca65157c12bd08a63e20ac0bdc21ac7f3694040711f9fd073c0ffb/attrs-21.2.0.tar.gz
-Source1  : https://files.pythonhosted.org/packages/ed/d6/3ebca4ca65157c12bd08a63e20ac0bdc21ac7f3694040711f9fd073c0ffb/attrs-21.2.0.tar.gz.asc
+Version  : 21.3.0
+Release  : 63
+URL      : https://files.pythonhosted.org/packages/53/04/e3468cac2a3eccd7312eba87341cc111335466277a0c97c43a026977cc9d/attrs-21.3.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/53/04/e3468cac2a3eccd7312eba87341cc111335466277a0c97c43a026977cc9d/attrs-21.3.0.tar.gz
+Source1  : https://files.pythonhosted.org/packages/53/04/e3468cac2a3eccd7312eba87341cc111335466277a0c97c43a026977cc9d/attrs-21.3.0.tar.gz.asc
 Summary  : Classes Without Boilerplate
 Group    : Development/Tools
 License  : MIT
@@ -19,6 +19,8 @@ Requires: attrs-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 BuildRequires : pluggy
 BuildRequires : py-python
+BuildRequires : pypi(setuptools)
+BuildRequires : pypi(wheel)
 BuildRequires : pytest
 BuildRequires : tox
 BuildRequires : virtualenv
@@ -32,16 +34,13 @@ BuildRequires : virtualenv
 </p>
 <p align="center">
 <a href="https://www.attrs.org/en/stable/?badge=stable">
-<img src="https://readthedocs.org/projects/attrs/badge/?version=stable" alt="Documentation Status" />
+<img src="https://img.shields.io/badge/Docs-Read%20The%20Docs-black" alt="Documentation" />
 </a>
-<a href="https://github.com/python-attrs/attrs/actions?workflow=CI">
-<img src="https://github.com/python-attrs/attrs/workflows/CI/badge.svg?branch=main" alt="CI Status" />
+<a href="https://github.com/python-attrs/attrs/blob/main/LICENSE">
+<img src="https://img.shields.io/badge/license-MIT-C06524" alt="License: MIT" />
 </a>
-<a href="https://codecov.io/github/python-attrs/attrs">
-<img src="https://codecov.io/github/python-attrs/attrs/branch/main/graph/badge.svg" alt="Test Coverage" />
-</a>
-<a href="https://github.com/psf/black">
-<img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black" />
+<a href="https://pypi.org/project/attrs/">
+<img src="https://img.shields.io/pypi/v/attrs" />
 </a>
 </p>
 
@@ -73,29 +72,29 @@ python3 components for the attrs package.
 
 
 %prep
-%setup -q -n attrs-21.2.0
-cd %{_builddir}/attrs-21.2.0
+%setup -q -n attrs-21.3.0
+cd %{_builddir}/attrs-21.3.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1635704860
+export SOURCE_DATE_EPOCH=1640707677
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
 export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
-python3 setup.py build
+python3 -m build --wheel --skip-dependency-check --no-isolation
 
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/attrs
-cp %{_builddir}/attrs-21.2.0/LICENSE %{buildroot}/usr/share/package-licenses/attrs/00ff890e8493d10b07d5d3fafa23639bb071e443
-python3 -tt setup.py build  install --root=%{buildroot}
+cp %{_builddir}/attrs-21.3.0/LICENSE %{buildroot}/usr/share/package-licenses/attrs/00ff890e8493d10b07d5d3fafa23639bb071e443
+pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
