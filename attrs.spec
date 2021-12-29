@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xAE2536227F69F181 (hs@ox.cx)
 #
 Name     : attrs
-Version  : 21.3.0
-Release  : 63
-URL      : https://files.pythonhosted.org/packages/53/04/e3468cac2a3eccd7312eba87341cc111335466277a0c97c43a026977cc9d/attrs-21.3.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/53/04/e3468cac2a3eccd7312eba87341cc111335466277a0c97c43a026977cc9d/attrs-21.3.0.tar.gz
-Source1  : https://files.pythonhosted.org/packages/53/04/e3468cac2a3eccd7312eba87341cc111335466277a0c97c43a026977cc9d/attrs-21.3.0.tar.gz.asc
+Version  : 21.4.0
+Release  : 64
+URL      : https://files.pythonhosted.org/packages/d7/77/ebb15fc26d0f815839ecd897b919ed6d85c050feeb83e100e020df9153d2/attrs-21.4.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/d7/77/ebb15fc26d0f815839ecd897b919ed6d85c050feeb83e100e020df9153d2/attrs-21.4.0.tar.gz
+Source1  : https://files.pythonhosted.org/packages/d7/77/ebb15fc26d0f815839ecd897b919ed6d85c050feeb83e100e020df9153d2/attrs-21.4.0.tar.gz.asc
 Summary  : Classes Without Boilerplate
 Group    : Development/Tools
 License  : MIT
@@ -72,15 +72,15 @@ python3 components for the attrs package.
 
 
 %prep
-%setup -q -n attrs-21.3.0
-cd %{_builddir}/attrs-21.3.0
+%setup -q -n attrs-21.4.0
+cd %{_builddir}/attrs-21.4.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640707677
+export SOURCE_DATE_EPOCH=1640791385
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -93,7 +93,7 @@ python3 -m build --wheel --skip-dependency-check --no-isolation
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/attrs
-cp %{_builddir}/attrs-21.3.0/LICENSE %{buildroot}/usr/share/package-licenses/attrs/00ff890e8493d10b07d5d3fafa23639bb071e443
+cp %{_builddir}/attrs-21.4.0/LICENSE %{buildroot}/usr/share/package-licenses/attrs/00ff890e8493d10b07d5d3fafa23639bb071e443
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
